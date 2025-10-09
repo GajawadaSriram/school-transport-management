@@ -1,0 +1,78 @@
+const express = require("express");
+const cors = require("cors");
+const connectDB = require("./config/db");
+const http = require("http");
+
+const path = require('path');
+
+require('dotenv').config();
+
+
+if (!process.env.JWT_SECRET) {
+  console.log('⚠️  JWT_SECRET not found, trying with explicit path...');
+  require('dotenv').config({ path: path.join(__dirname, '.env') });
+}
+  
+const fs = require('fs');
+const envPath = path.join(__dirname, '.env');
+if (fs.existsSync(envPath)) {
+  console.log('✅ .env file exists at:', envPath);
+  try {
+    const envContent = fs.readFileSync(envPath, 'utf8');
+  } catch (err) {
+    console.error('❌ Error reading .env file:', err.message);
+  }
+} else {
+  console.log('❌ .env file NOT found at:', envPath);
+}
+
+const app = express();
+const server = http.createServer(app);
+
+app.use(cors());
+app.use(express.json());
+
+app.get('/test', (req, res) => {
+  res.json({ message: 'Server is working!' });
+});
+
+
+app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/api/drivers", require("./routes/driverRoutes"));
+app.use("/api/buses", require("./routes/busRoutes"));
+app.use("/api/routes", require("./routes/routeRoutes"));
+app.use("/api/notifications", require("./routes/notificationRoutes"));
+
+
+const { Server } = require('socket.io');
+const socketService = require("./services/socket/socketService");
+
+const io = new Server(server, {
+  cors: {
+    origin: process.env.FRONTEND_URL || "http://localhost:5173",
+    methods: ["GET", "POST"]
+  }
+});
+
+socketService.initialize(io);
+
+
+const startServer = async () => {
+  try {
+    await connectDB();
+    console.log("✅ Database connected successfully");
+    
+    const PORT = process.env.PORT || 5000;
+    server.listen(PORT, () => {
+      console.log(`🚀 Server running on port ${PORT}`);
+      console.log(`📡 Socket.IO initialized`);
+      console.log(`🔗 Test server: http://localhost:${PORT}/test`);
+      console.log(`🔗 API base: http://localhost:${PORT}/api`);
+    });
+  } catch (error) {
+    console.error("❌ Failed to start server:", error.message);
+    process.exit(1);
+  }
+};
+
+startServer();

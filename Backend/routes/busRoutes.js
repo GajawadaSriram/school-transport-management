@@ -9,7 +9,7 @@ const {
   updateBus,
   assignDriver,
   removeDriver,
-} = require("../controllers/busConctroller");
+} = require("../controllers/busController");
 
 router.post("/", protect, roleOnly("admin"), createBus);
 router.get("/", protect, roleOnly("admin"), getBuses);

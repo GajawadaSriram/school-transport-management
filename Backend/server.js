@@ -33,9 +33,7 @@ const server = http.createServer(app);
 const allowedOrigins = [
   process.env.FRONTEND_URL,
   "http://localhost:5173",
-  "http://127.0.0.1:5173",
-  "http://192.168.0.5:5173",
-  "http://192.168.0.2:5173" // Adding potential other local IP
+  "http://44.220.146.209" 
 ].filter(Boolean);
 
 app.use((req, res, next) => {

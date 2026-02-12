@@ -33,7 +33,7 @@ const server = http.createServer(app);
 const allowedOrigins = [
   process.env.FRONTEND_URL,
   "http://localhost:5173",
-  "https://school-transport-management-ocou-2sx9h6aqh.vercel.app"
+  "school-transport-management.vercel.app"
 ].filter(Boolean);
 
 app.use((req, res, next) => {

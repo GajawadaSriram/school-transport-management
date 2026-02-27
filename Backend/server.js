@@ -34,6 +34,7 @@ const allowedOrigins = [
   process.env.FRONTEND_URL,
   "http://localhost:5173",
   "https://busnotify.me",
+  "https://school-transport-management.vercel.app",
   "https://school-transport-management-ocou-2sx9h6aqh.vercel.app"
 ].filter(Boolean);
 
@@ -53,6 +54,10 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.json({ status: "API is Live", domain: "busnotify.me", ssl: true });
+});
 
 app.get('/test', (req, res) => {
   res.json({ message: 'Server is working!' });

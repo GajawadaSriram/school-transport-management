@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axiosInstance from "../api/axiosInstance";
-import { AtSignIcon, KeyIcon, AlertCircleIcon, LoaderIcon } from 'lucide-react'
+import { AtSignIcon, KeyIcon, AlertCircleIcon, LoaderIcon, Bus } from 'lucide-react'
 // import "../styles/StudentLoginForm.css";
 import { useNavigate, Link } from "react-router-dom";
 import { useNotifications } from "../contexts/NotificationContext";
@@ -110,11 +110,24 @@ const StudentLoginForm = () => {
       {/* Decorative background elements */}
       <div className="absolute top-0 left-0 w-full h-32 bg-blue-500 opacity-10 rounded-br-full"></div>
       <div className="absolute bottom-0 right-0 w-full h-32 bg-indigo-500 opacity-10 rounded-tl-full"></div>
-      <div className="bg-white rounded-xl shadow-xl w-full max-w-md p-8 relative z-10">
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
-            Welcome Back
+      
+      <div className="w-full max-w-md relative z-10 mt-12 mb-8 sm:mt-0 sm:mb-0">
+        {/* Project Title */}
+        <div className="text-center mb-8 relative z-20">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-2 tracking-tight drop-shadow-sm flex items-center justify-center gap-2">
+            <Bus className="text-blue-600 h-10 w-10" />
+            BusNotify
           </h1>
+          <p className="text-base sm:text-lg text-indigo-900/80 font-semibold tracking-wide">
+            Real-Time School Transport Logistics
+          </p>
+        </div>
+
+        <div className="bg-white rounded-xl shadow-xl w-full p-8 relative">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold text-gray-800 mb-2">
+              Welcome Back
+            </h2>
           <p className="text-gray-600">Sign in to your student account</p>
         </div>
         <form className="space-y-6" onSubmit={handleSubmit}>
@@ -233,6 +246,7 @@ const StudentLoginForm = () => {
               Sign up here
             </Link>
           </p>
+        </div>
         </div>
       </div>
     </div>

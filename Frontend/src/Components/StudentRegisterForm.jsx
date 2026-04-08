@@ -132,9 +132,20 @@ const StudentRegisterForm = () => {
       {/* ✅ Toaster for sonner notifications */}
       <Toaster richColors position="top-right" />
 
-      <div className="w-full max-w-md relative">
+      <div className="w-full max-w-md relative z-10 mt-12 mb-8 sm:mt-0 sm:mb-0">
+        {/* Project Title */}
+        <div className="text-center mb-8 relative z-20">
+          <h1 className="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 mb-2 tracking-tight drop-shadow-sm flex items-center justify-center gap-2">
+            <Bus className="text-blue-600 h-10 w-10" />
+            BusNotify
+          </h1>
+          <p className="text-base sm:text-lg text-indigo-900/80 font-semibold tracking-wide">
+            Real-Time School Transport Logistics
+          </p>
+        </div>
+
         {/* Animated bus icons */}
-        <div className="absolute -top-16 -left-8 animate-bounce-slow opacity-70">
+        <div className="absolute -top-16 -left-8 animate-bounce-slow opacity-70 hidden sm:block">
           <Bus size={32} className="text-blue-500" />
         </div>
         <div className="absolute top-10 -right-10 animate-bounce-slow animation-delay-300 opacity-70">

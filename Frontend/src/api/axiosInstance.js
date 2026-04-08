@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: "https://api.busnotify.me",
+  //baseURL: "https://api.busnotify.me",
+  baseURL: (import.meta.env.VITE_BACKEND_URL || "http://localhost:5000") + "/api",
 });
 
 // Request interceptor to add JWT token
